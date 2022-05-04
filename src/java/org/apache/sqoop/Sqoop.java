@@ -143,6 +143,7 @@ public class Sqoop extends Configured implements Tool {
       return 1; // Exit on exception here.
     }
 
+    // TODO sqoop MR任务启动入口
     return tool.run(options);
   }
 
@@ -221,6 +222,7 @@ public class Sqoop extends Configured implements Tool {
 
     String toolName = expandedArgs[0];
     Configuration pluginConf = SqoopTool.loadPlugins(conf);
+    // TODO 根据命令行选项创建各种Tool实现，最终会根据这些tool创建对应的MR任务
     SqoopTool tool = SqoopTool.getTool(toolName);
     if (null == tool) {
       System.err.println("No such sqoop tool: " + toolName
