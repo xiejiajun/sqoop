@@ -58,7 +58,9 @@ public class HiveServer2Client implements HiveClient {
   @Override
   public void importTable() throws IOException {
     LOG.info("Loading uploaded data into Hive.");
+    // TODO CreateTable语句
     String createTableStmt = tableDefWriter.getCreateTableStmt();
+    // TODO load Data语句
     String loadDataStmt = tableDefWriter.getLoadDataStmt();
     executeHiveImport(asList(createTableStmt, loadDataStmt));
     LOG.info("Hive import complete.");

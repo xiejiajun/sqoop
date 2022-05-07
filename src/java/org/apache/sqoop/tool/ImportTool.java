@@ -512,6 +512,7 @@ public class ImportTool extends BaseSqoopTool {
     String jarFile = null;
 
     // Generate the ORM code for the tables.
+    // TODO 生成数据解析任务Jar
     jarFile = codeGenerator.generateORM(options, options.getTableName());
 
     Path outputPath = getOutputPath(options, options.getTableName());
@@ -530,6 +531,7 @@ public class ImportTool extends BaseSqoopTool {
       deleteTargetDir(context);
     }
 
+    // TODO 将数据导入到HDFS上
     if (null != options.getTableName()) {
       manager.importTable(context);
     } else {
@@ -545,6 +547,7 @@ public class ImportTool extends BaseSqoopTool {
 
     // If the user wants this table to be in Hive, perform that post-load.
     if (isHiveImportNeeded(options)) {
+      // TODO 将HDFS上的文件加载成Hive表（Hive的CreateTable
       HiveClient hiveClient = hiveClientFactory.createHiveClient(options, manager);
       hiveClient.importTable();
     }

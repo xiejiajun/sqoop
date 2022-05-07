@@ -171,7 +171,9 @@ public class HiveImport implements HiveClient {
     TableDefWriter tableWriter = new TableDefWriter(options, connManager,
         inputTableName, outputTableName,
         configuration, !debugMode);
+    // TODO createTable语句
     String createTableStr = tableWriter.getCreateTableStmt() + ";\n";
+    // TODO load Data语句
     String loadDataStmtStr = tableWriter.getLoadDataStmt() + ";\n";
     Path finalPath = tableWriter.getFinalPath();
 
@@ -183,6 +185,7 @@ public class HiveImport implements HiveClient {
     }
 
     // write them to a script file.
+    // TODO 写入SQL脚本
     File scriptFile = getScriptFile(outputTableName);
     try {
       String filename = scriptFile.toString();
@@ -210,6 +213,7 @@ public class HiveImport implements HiveClient {
       }
 
       if (!isGenerateOnly()) {
+        // TODO 执行SQL脚本将HDFS上的数据加载到Hive表
         executeScript(filename, env);
 
         LOG.info("Hive import complete.");

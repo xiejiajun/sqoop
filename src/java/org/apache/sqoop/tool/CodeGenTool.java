@@ -103,8 +103,11 @@ public class CodeGenTool extends BaseSqoopTool {
     CompilationManager compileMgr = new CompilationManager(options);
     ClassWriter classWriter = new ClassWriter(options, manager, tableName,
         compileMgr);
+    // TODO 使用拼接字符串的方式生成代码
     classWriter.generate();
+    // TODO 使用JavaCompiler编译生成的代码
     compileMgr.compile();
+    // TODO 打jar包
     compileMgr.jar();
     String jarFile = compileMgr.getJarFilename();
     this.generatedJarFiles.add(jarFile);
