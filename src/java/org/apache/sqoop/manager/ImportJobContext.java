@@ -48,6 +48,7 @@ public class ImportJobContext {
       this.jarFile = Jars.getJarPathForClass(Configuration.class);
     }
     this.options = opts;
+    // TODO 封装了通过JDBC差RDBMS的逻辑, 读取数据的SQL在DataDrivenDBInputFormat.getSplits里面执行
     this.inputFormatClass = DataDrivenDBInputFormat.class;
     this.destination = destination;
   }

@@ -140,6 +140,7 @@ public class DataDrivenDBInputFormat<T extends DBWritable>
   public List<InputSplit> getSplits(JobContext job) throws IOException {
 
     int targetNumTasks = ConfigurationHelper.getJobNumMaps(job);
+    // TODO 用户指定的query
     String boundaryQuery = getDBConf().getInputBoundingQuery();
 
     long splitLimit = org.apache.sqoop.config.ConfigurationHelper
@@ -163,6 +164,7 @@ public class DataDrivenDBInputFormat<T extends DBWritable>
     try {
       statement = connection.createStatement();
 
+      // TODO 生成数据读取的SQL（带分片条件）
       String query = getBoundingValsQuery();
       LOG.info("BoundingValsQuery: " + query);
 

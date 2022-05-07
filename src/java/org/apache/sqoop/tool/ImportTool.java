@@ -518,6 +518,7 @@ public class ImportTool extends BaseSqoopTool {
     Path outputPath = getOutputPath(options, options.getTableName());
 
     // Do the actual import.
+    // TODO 这里面定义的DataDrivenDBInputFormat封装了通过JDBC差RDBMS的逻辑
     ImportJobContext context = new ImportJobContext(options.getTableName(), jarFile,
         options, outputPath);
 
@@ -531,7 +532,9 @@ public class ImportTool extends BaseSqoopTool {
       deleteTargetDir(context);
     }
 
-    // TODO 将数据导入到HDFS上
+    // TODO 将数据导入到HDFS上, context中的InputFormat里面定义的通过JDBC读取数据的逻辑
+    //  执行流程：-> ... -> ImportJobBase.runImport -> (MR -> SQL -> HDFS / HBASE -> ...)  -> 如果是HiveImport / HCatJob就执行PublishJobData.publishJobData
+    //          -> 执行SqoopJobDataPublisher.publish钩子
     if (null != options.getTableName()) {
       manager.importTable(context);
     } else {

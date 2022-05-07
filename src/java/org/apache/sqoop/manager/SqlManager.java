@@ -688,6 +688,7 @@ public abstract class SqlManager
     checkTableImportOptions(context);
 
     String splitCol = getSplitColumn(opts, tableName);
+    // TODO 通过JDBC将RDBMS中的数据导入到HDFS / HBase
     importer.runImport(tableName, jarFile, splitCol, opts.getConf());
   }
 
