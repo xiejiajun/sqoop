@@ -221,6 +221,7 @@ public abstract class AsyncSqlOutputFormat<K extends SqoopRecord, V>
           continue;
         }
 
+        // TODO 这里才是执行export指令对应的数据导出SQL的地方
         PreparedStatement stmt = op.getStatement();
         // Synchronize on the connection to ensure it does not conflict
         // with the prepareStatement() call in the main thread.

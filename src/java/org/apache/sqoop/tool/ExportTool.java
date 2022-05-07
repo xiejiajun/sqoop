@@ -79,6 +79,10 @@ public class ExportTool extends BaseSqoopTool {
     ExportJobContext context = new ExportJobContext(tableName, jarFile,
         options);
     // TODO 通过JDBC insert / update语句将数据导出的RDBMS
+    //   这里面跟下去会发现最终是通过ExportJobBase.runExport -> ... MR
+    //   -> ... AsyncSqlOutputFormat.AsyncSqlExecThread.run通过JDBC执行导出数据的SQL
+    //   -> ... -> 调用org.apache.sqoop.SqoopJobDataPublisher.publish钩子
+
     if (options.getUpdateKeyCol() != null) {
       if (options.getUpdateMode() == UpdateMode.UpdateOnly) {
         // UPDATE-based export.

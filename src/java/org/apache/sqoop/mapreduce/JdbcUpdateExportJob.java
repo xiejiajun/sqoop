@@ -59,6 +59,7 @@ public class JdbcUpdateExportJob extends ExportJobBase {
    */
   private static Class<? extends OutputFormat> getUpdateOutputFormat()
        throws IOException {
+    // TODO UpdateOutputFormat里面封装了导出数据的SQL
     return UpdateOutputFormat.class;
   }
 

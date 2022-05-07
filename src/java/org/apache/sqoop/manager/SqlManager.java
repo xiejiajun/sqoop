@@ -961,6 +961,7 @@ public abstract class SqlManager
       throws IOException, ExportException {
     context.setConnManager(this);
     JdbcUpdateExportJob exportJob = new JdbcUpdateExportJob(context, getParquetJobConfigurator().createParquetExportJobConfigurator());
+    // TODO 这里最终会调用到org.apache.sqoop.SqoopJobDataPublisher.publish钩子
     exportJob.runExport();
   }
 

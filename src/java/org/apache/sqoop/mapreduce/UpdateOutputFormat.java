@@ -75,6 +75,8 @@ public class UpdateOutputFormat<K extends SqoopRecord, V>
   public RecordWriter<K, V> getRecordWriter(TaskAttemptContext context)
       throws IOException {
     try {
+      // TODO UpdateRecordWriter里面封装了通过SQL导出数据的逻辑, SQL是在
+      //  UpdateOutputFormat.UpdateRecordWriter.getUpdateStatement里面拼接出来的
       return new UpdateRecordWriter(context);
     } catch (Exception e) {
       throw new IOException(e);
