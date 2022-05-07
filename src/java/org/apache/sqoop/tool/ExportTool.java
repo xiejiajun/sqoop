@@ -73,10 +73,12 @@ public class ExportTool extends BaseSqoopTool {
     String jarFile = null;
 
     // Generate the ORM code for the tables.
+    // TODO 生成数据解析任务Jar
     jarFile = codeGenerator.generateORM(options, tableName);
 
     ExportJobContext context = new ExportJobContext(tableName, jarFile,
         options);
+    // TODO 通过JDBC insert / update语句将数据导出的RDBMS
     if (options.getUpdateKeyCol() != null) {
       if (options.getUpdateMode() == UpdateMode.UpdateOnly) {
         // UPDATE-based export.
